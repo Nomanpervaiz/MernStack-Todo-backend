@@ -4,11 +4,25 @@ import { UserModel } from "../models/UserSchema.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
 import 'dotenv/config'
+import { authenticateUser } from "../middleware/authenticateUser.js";
 
 const router = express.Router();
 
-router.get("/login", (req, res) => {
-  res.status(200).json("User Route");
+router.get("/login", authenticateUser, async (req, res) => {
+  try {
+    console.log("token ===> " , req.user);
+    const users = await UserModel.find()
+    res.status(200).json({
+      error: false,
+      message: "Get Data Fetched successfully",
+      users,
+    });
+  } catch (error) {
+    res.status(400).json({
+      error: true,
+      message: "Error in getting Data!" || error.message,
+    });
+  }
 });
 
 

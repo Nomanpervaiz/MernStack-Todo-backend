@@ -3,26 +3,8 @@ import { z } from "zod";
 import { TaskModel } from "../models/TaskSchema.js";
 const router = express.Router();
 
-function middleware(req, res, next) {
-  console.log("get req ==>", req.query);
-  const query = req.query.auth === "true";
-  if (!query) {
-    return res
-      .status(403)
-      .send("You are not authorized to access this resource.");
-  }
-  next();
-}
 
-// router.get("/:id",  (req, res) => {
-//     console.log("get req ==>", req.params);
-//     const parameterId = req.params.id
-//     const findId = tasks.findIndex((obj) => obj.id == parameterId)
-//     if (tasks[findId]) {
-//         res.status(200).send(tasks[findId]);
-//     }
-//     res.status(404).send("task not found!");
-// });
+
 
 
 // task get from mongoDb
@@ -94,10 +76,9 @@ router.put("/", async (req, res) => {
 });
 
 
-
-router.delete("/", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     const deleteTask = await TaskModel.deleteOne({ _id: id });
     console.log(deleteTask);
     if (deleteTask?.deletedCount === 0) {
