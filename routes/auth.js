@@ -8,7 +8,7 @@ import { authenticateUser } from "../middleware/authenticateUser.js";
 const router = express.Router();
 
 
-router.get("/login", authenticateUser, async (req, res) => {
+router.get("/login", async (req, res) => {
   try {
     console.log("token ===> " , req.user);
     const users = await UserModel.find()
