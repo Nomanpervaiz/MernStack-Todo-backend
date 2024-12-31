@@ -9,8 +9,7 @@ const router = express.Router();
 
 // task get from mongoDb
 router.get("/", async (req, res) => {
-  log("req from thunder ==>",req.user);
-  const tasks = await TaskModel.find({ taskAddedBy: taskAddedBy });
+  const tasks = await TaskModel.find();
   res.status(200).json({
     error: false,
     message: "Get Data Fetched successfully !",
