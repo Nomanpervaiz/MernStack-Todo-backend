@@ -114,7 +114,7 @@ router.post("/login", async (req, res) => {
       })
     }
 
-    let token = jwt.sign({ id: isUserExist._id, email: isUserExist.email } ,process.env.JWT_SECRET )
+    let token = jwt.sign({ id: isUserExist._id, email: isUserExist.email } ,process?.env?.JWT_SECRET )
     res.status(200).json({
       error: false,
       message: "User Login Succesfully!",
