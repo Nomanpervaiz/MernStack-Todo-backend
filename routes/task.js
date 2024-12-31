@@ -26,12 +26,12 @@ router.post("/", async (req, res) => {
     const taskSchema = z.object({
       task: z.string().min(1, { message: "Task is required and cannot be empty" }),
       status: z.enum(["pending", "inprogress", "done"]),
-      
+      taskAddedBy: z.string(),
     });
     
     const validTaskData = taskSchema.parse(req.body);
     // task added to mongoDb ===>
-    let newTask = new TaskModel({...validTaskData, taskAddedBy : req.user._id});
+    let newTask = new TaskModel(validTaskData);
     newTask = await newTask.save();
     res.status(201).json({
       error: false,
