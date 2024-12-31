@@ -9,7 +9,7 @@ const router = express.Router();
 
 // task get from mongoDb
 router.get("/", async (req, res) => {
-  const tasks = await TaskModel.find({taskAddedBy : req.user._id});
+  const tasks = await TaskModel.find();
   res.status(200).json({
     error: false,
     message: "Get Data Fetched successfully !",
