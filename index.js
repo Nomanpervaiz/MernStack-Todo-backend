@@ -18,4 +18,5 @@ app.get("/", (req, res) => res.send("main page get called"));
 app.use("/auth", authRoutes);
 app.use("/task", taskRoutes);
 
+
 app.listen(PORT, () => console.log("Server runing on PORT " + PORT));

@@ -8,23 +8,6 @@ import { authenticateUser } from "../middleware/authenticateUser.js";
 const router = express.Router();
 
 
-router.get("/login", async (req, res) => {
-  try {
-    console.log("token ===> " , req.user);
-    const users = await UserModel.find()
-    res.status(200).json({
-      error: false,
-      message: "Get Data Fetched successfully",
-      users,
-    });
-  } catch (error) {
-    res.status(400).json({
-      error: true,
-      message: "Error in getting Data!" || error.message,
-    });
-  }
-});
-
 
 router.get("/register", async (req, res) => {
   try {
@@ -44,6 +27,15 @@ router.get("/register", async (req, res) => {
     });
   }
 });
+
+router.get('/login', authenticateUser, async (req, res) => {
+  const tasks = await UserModel.findById(req.user._id)
+  res.status(200).json({
+      data: tasks,
+      message: "User fetched successfully",
+      error: false,
+  })
+})
 
 
 // Register Flow <==
