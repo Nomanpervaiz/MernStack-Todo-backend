@@ -8,7 +8,6 @@ import { authenticateUser } from "../middleware/authenticateUser.js";
 const router = express.Router();
 
 
-
 router.get("/register", async (req, res) => {
   try {
     console.log("register data ==>" , req.body);
@@ -110,7 +109,7 @@ router.post("/login", async (req, res) => {
     res.status(200).json({
       error: false,
       message: "User Login Succesfully!",
-      data: {token ,user:{email : isUserExist.email , id : isUserExist._id}}
+      data: {token ,user:{email : isUserExist.email , _id : isUserExist._id}}
     })
   } catch (error) {
     res.status(500).json({

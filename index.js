@@ -14,7 +14,8 @@ mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("Mongodb Connected"))
   .catch((err) => console.log("error in connection",err));
-app.get("/", (req, res) => res.send("main page get called"));
+
+app.get("/", (req, res) => res.send(new Date()));
 app.use("/auth", authRoutes);
 app.use("/task", taskRoutes);
 

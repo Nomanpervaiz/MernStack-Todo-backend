@@ -33,7 +33,6 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   console.log("req from thunder ==>", req.body);
-
   try {
     // Zod validation === > 
     const taskSchema = z.object({
